@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import CenterContainer from '../src/containers/CenterContainer';
+import CenterContainer from '../../src/containers/CenterContainer';
 
 const style = {
 	container: {
