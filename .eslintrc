@@ -1,0 +1,24 @@
+{
+	"parser": "babel-eslint",
+	"extends": [
+		"airbnb"
+	],
+	"globals" : {
+		"__LOCAL__"    : false,
+		"__DEV__"      : false,
+		"__PROD__"     : false,
+		"__DEBUG__"    : false,
+		"__DEBUG_NEW_WINDOW__" : false,
+		"__BASENAME__" : false
+	},
+	"env": {
+		"browser": true,
+		"jest": true
+	},
+	"rules": {
+		"indent" : [2, "tab", { "SwitchCase": 1 }],
+		"react/jsx-indent": [2, 'tab'],
+		"react/jsx-indent-props": [2, 'tab'],
+		"no-tabs": 0
+	}
+}
