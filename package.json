@@ -1,6 +1,6 @@
 {
   "name": "sipgate-react-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "sipgate React Components, used in several sipgate projects.",
   "main": "dist/index.js",
   "scripts": {
