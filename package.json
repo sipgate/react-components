@@ -2,10 +2,14 @@
   "name": "sipgate-react-components",
   "version": "0.0.3",
   "description": "sipgate React Components, used in several sipgate projects.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "start-storybook -p 9001",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "compile": "npm run clean && babel src -d dist",
+    "clean": "rimraf dist/*",
+    "prepublish": "npm run compile",
+    "postpublish": "npm run clean"
   },
   "keywords": [
     "sipgate",
@@ -36,6 +40,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.1",
     "react-dom": "~15.3.2",
+    "rimraf": "^2.5.4",
     "webpack": "1.13.3"
   }
 }
