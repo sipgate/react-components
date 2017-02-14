@@ -1,51 +1,71 @@
 import React from 'react';
-import Radium from 'radium';
-import moment from 'moment-timezone';
 import { sprintf } from 'sprintf-js/src/sprintf';
 
 export class Stopwatch extends React.Component {
+
 	static propTypes = {
 		style: React.PropTypes.object,
-	}
+		className: React.PropTypes.string,
+		start: React.PropTypes.instanceOf(Date),
+	};
 
 	static defaultProps = {
 		style: {},
-	}
+	};
+
+	state = {
+		elapsed: 0,
+		startTime: new Date(),
+		timer: null,
+	};
 
 	componentWillMount() {
+		const startTime = this.props.start || new Date();
 		this.setState({
-			elapsed: 0,
-			startTime: moment(),
+			elapsed: this.calculateElapsedSeconds(startTime),
+			startTime: startTime,
 			timer: setInterval(() => {
 				this.setState({
-					elapsed: moment.duration(
-						moment().diff(this.state.startTime)
-					).asSeconds(),
+					elapsed: this.calculateElapsedSeconds(this.state.startTime),
 				});
 			}, 500),
 		});
 	}
+
+	calculateElapsedSeconds = (startTime) => {
+		const now = new Date();
+		const timeDiff = now.getTime() - startTime.getTime();
+
+		return Math.abs(timeDiff / 1000);
+	};
+
 	componentWillUnmount() {
 		clearInterval(this.state.timer);
 	}
 
-	getDiffString = () => {
-		const duration = moment.duration(this.state.elapsed, 'seconds');
+	getTimeDiffString = () => {
+		const seconds = Math.floor(this.state.elapsed % 60);
+		const minutes = Math.floor(this.state.elapsed / 60) % 60;
+		const hours = Math.floor(this.state.elapsed / 3600);
 
-		if (duration.hours() > 0) {
-			return duration.hours() + ':' + sprintf('%02d', duration.minutes()) + ':' + sprintf('%02d', duration.seconds());
+		let timeString = '';
+
+		if(hours > 0) {
+			timeString += sprintf('%02d', hours) + ':';
 		}
 
-		return duration.minutes() + ':' + sprintf('%02d', duration.seconds());
-	}
+		timeString += sprintf('%02d', minutes) + ':' + sprintf('%02d', seconds);
+
+		return timeString;
+	};
 
 	render() {
 		return (
-			<span style={this.props.style}>
-				{this.getDiffString()}
+			<span style={this.props.style} className={this.props.className}>
+				{this.getTimeDiffString()}
 			</span>
 		);
 	}
 }
 
-export default Radium(Stopwatch);
+export default Stopwatch;
