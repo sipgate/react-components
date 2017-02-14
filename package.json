@@ -23,10 +23,8 @@
   "author": "sipgate",
   "license": "Apache-2.0",
   "dependencies": {
-    "moment-timezone": "~0.5.9",
-    "react": "~15.3.2",
-    "react-dom": "~15.3.2",
-    "radium": "http://github.com/FormidableLabs/radium/tarball/2c3746eeb83df8a57617f862e167e3ea5d3c27b7",
+    "react": "~15.4.1",
+    "react-dom": "~15.4.1",
     "sprintf-js": "~1.0.3"
   },
   "devDependencies": {
